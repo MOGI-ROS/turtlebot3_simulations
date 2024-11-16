@@ -4296,11 +4296,21 @@
             </mesh>
           </geometry>
           <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0.2 0.2 0.2 1</specular>
+            <emissive>0 0 0 1</emissive>
             <script>
               <uri>model://mailbox/materials/scripts</uri>
               <uri>model://mailbox/materials/textures</uri>
               <name>Mailbox/Diffuse</name>
             </script>
+            <pbr>
+              <metal>
+                <albedo_map>model://mailbox/materials/textures/Mailbox_Diffuse.png</albedo_map>
+                <metalness_map>model://mailbox/materials/textures/Mailbox_Spec.png</metalness_map>
+              </metal>
+            </pbr>
           </material>
         </visual>
       </link>
