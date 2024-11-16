@@ -61,7 +61,7 @@ def generate_launch_description():
     bridge_params = os.path.join(
         get_package_share_directory('turtlebot3_gazebo'),
         'params',
-        'turtlebot3_waffle_bridge.yaml'
+        'turtlebot3_bridge.yaml'
     )
 
     start_gazebo_ros_bridge_cmd = Node(
