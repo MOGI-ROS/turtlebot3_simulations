@@ -28,7 +28,12 @@ from launch_ros.actions import Node
 def generate_launch_description():
     TURTLEBOT3_MODEL = os.environ['TURTLEBOT3_MODEL']
 
-    use_sim_time = LaunchConfiguration('use_sim_time', default='false')
+    pkg_turtlebot3_gazebo = get_package_share_directory('turtlebot3_gazebo')
+
+    gazebo_models_path, ignore_last_dir = os.path.split(pkg_turtlebot3_gazebo)
+    os.environ["GZ_SIM_RESOURCE_PATH"] += os.pathsep + gazebo_models_path
+
+    use_sim_time = LaunchConfiguration('use_sim_time', default='true')
     urdf_file_name = 'turtlebot3_' + TURTLEBOT3_MODEL + '.urdf'
 
     print('urdf_file_name : {}'.format(urdf_file_name))
