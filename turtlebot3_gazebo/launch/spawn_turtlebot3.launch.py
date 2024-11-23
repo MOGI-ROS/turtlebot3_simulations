@@ -32,18 +32,21 @@ def generate_launch_description():
         'model.sdf'
     )
 
-    # Launch configuration variables specific to simulation
-    x_pose = LaunchConfiguration('x_pose', default='0.0')
-    y_pose = LaunchConfiguration('y_pose', default='0.0')
-
     # Declare the launch arguments
-    declare_x_position_cmd = DeclareLaunchArgument(
+    x_pose_arg = DeclareLaunchArgument(
         'x_pose', default_value='0.0',
-        description='Specify namespace of the robot')
+        description='x coordinate of spawned robot'
+    )
 
-    declare_y_position_cmd = DeclareLaunchArgument(
+    y_pose_arg = DeclareLaunchArgument(
         'y_pose', default_value='0.0',
-        description='Specify namespace of the robot')
+        description='y coordinate of spawned robot'
+    )
+
+    yaw_angle_arg = DeclareLaunchArgument(
+        'yaw_angle', default_value='0.0',
+        description='yaw angle of spawned robot'
+    )
 
     start_gazebo_ros_spawner_cmd = Node(
         package='ros_gz_sim',
@@ -51,9 +54,10 @@ def generate_launch_description():
         arguments=[
             '-name', TURTLEBOT3_MODEL,
             '-file', urdf_path,
-            '-x', x_pose,
-            '-y', y_pose,
-            '-z', '0.01'
+            '-x', LaunchConfiguration('x_pose'),
+            '-y', LaunchConfiguration('y_pose'),
+            '-z', '0.01',
+            '-Y', LaunchConfiguration('yaw_angle')
         ],
         output='screen',
     )
@@ -85,8 +89,9 @@ def generate_launch_description():
     ld = LaunchDescription()
 
     # Declare the launch options
-    ld.add_action(declare_x_position_cmd)
-    ld.add_action(declare_y_position_cmd)
+    ld.add_action(x_pose_arg)
+    ld.add_action(y_pose_arg)
+    ld.add_action(yaw_angle_arg)
 
     # Add any conditioned actions
     ld.add_action(start_gazebo_ros_spawner_cmd)

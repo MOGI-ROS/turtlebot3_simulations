@@ -21,7 +21,7 @@ import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import AppendEnvironmentVariable
-from launch.actions import IncludeLaunchDescription
+from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration, TextSubstitution, PathJoinSubstitution
 
@@ -30,6 +30,21 @@ def generate_launch_description():
     launch_file_dir = os.path.join(get_package_share_directory('turtlebot3_gazebo'), 'launch')
     ros_gz_sim = get_package_share_directory('ros_gz_sim')
     pkg_turtlebot3_gazebo = get_package_share_directory('turtlebot3_gazebo')
+
+    x_pose_arg = DeclareLaunchArgument(
+        'x_pose', default_value='-2.0',
+        description='x coordinate of spawned robot'
+    )
+
+    y_pose_arg = DeclareLaunchArgument(
+        'y_pose', default_value='1.0',
+        description='y coordinate of spawned robot'
+    )
+
+    yaw_angle_arg = DeclareLaunchArgument(
+        'yaw_angle', default_value='0.0',
+        description='yaw angle of spawned robot'
+    )
 
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
     x_pose = LaunchConfiguration('x_pose', default='-2.0')
@@ -66,14 +81,18 @@ def generate_launch_description():
             os.path.join(launch_file_dir, 'spawn_turtlebot3.launch.py')
         ),
         launch_arguments={
-            'x_pose': x_pose,
-            'y_pose': y_pose
+            'x_pose': LaunchConfiguration('x_pose'),
+            'y_pose': LaunchConfiguration('y_pose'),
+            'yaw_angle': LaunchConfiguration('yaw_angle'),
         }.items()
     )
 
     ld = LaunchDescription()
 
     # Add the commands to the launch description
+    ld.add_action(x_pose_arg)
+    ld.add_action(y_pose_arg)
+    ld.add_action(yaw_angle_arg)
     ld.add_action(set_env_vars_resources)
     ld.add_action(gazebo_cmd)
     ld.add_action(robot_state_publisher_cmd)
