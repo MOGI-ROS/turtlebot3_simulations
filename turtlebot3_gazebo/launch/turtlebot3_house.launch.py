@@ -47,8 +47,6 @@ def generate_launch_description():
     )
 
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
-    x_pose = LaunchConfiguration('x_pose', default='-2.0')
-    y_pose = LaunchConfiguration('y_pose', default='1.0')
     world_file = LaunchConfiguration('world', default='turtlebot3_house.sdf')
 
     set_env_vars_resources = AppendEnvironmentVariable(
@@ -65,7 +63,8 @@ def generate_launch_description():
             'worlds',
             world_file
         ]),
-        TextSubstitution(text=' -r -v -v1 --render-engine ogre --render-engine-gui-api-backend opengl')],
+        #TextSubstitution(text=' -r -v -v1 --render-engine ogre --render-engine-gui-api-backend opengl')],
+        TextSubstitution(text=' -r -v -v1')],
         'on_exit_shutdown': 'true'}.items()
     )
 

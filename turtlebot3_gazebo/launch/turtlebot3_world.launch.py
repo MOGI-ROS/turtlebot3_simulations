@@ -50,7 +50,8 @@ def generate_launch_description():
             'worlds',
             world_file
         ]),
-        TextSubstitution(text=' -r -v -v1 --render-engine ogre --render-engine-gui-api-backend opengl')],
+        #TextSubstitution(text=' -r -v -v1 --render-engine ogre --render-engine-gui-api-backend opengl')],
+        TextSubstitution(text=' -r -v -v1')],
         'on_exit_shutdown': 'true'}.items()
     )
 
