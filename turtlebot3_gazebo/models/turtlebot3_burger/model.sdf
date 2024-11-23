@@ -3,21 +3,33 @@
   <model name="turtlebot3_burger">
     <pose>0.0 0.0 0.0 0.0 0.0 0.0</pose>
 
-    <link name="base_footprint"/>
+    <link name="base_footprint">
+      <inertial>
+        <inertia>
+          <ixx>0.0000001</ixx>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyy>0.0000001</iyy>
+          <iyz>0.0</iyz>
+          <izz>0.0000001</izz>
+        </inertia>
+        <mass>0.0001</mass>
+      </inertial>
+    </link>
 
     <link name="base_link">
 
       <inertial>
-        <pose>-0.032 0 0.070 0 0 0</pose>
+        <pose>-0.032 0 0.0 0 0 0</pose>
         <inertia>
-          <ixx>7.2397393e-01</ixx>
-          <ixy>4.686399e-10</ixy>
-          <ixz>-1.09525703e-08</ixz>
-          <iyy>7.2397393e-01</iyy>
-          <iyz>2.8582649e-09</iyz>
-          <izz>6.53050163e-01</izz>
+          <ixx>0.0023</ixx>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyy>0.0023</iyy>
+          <iyz>0.0</iyz>
+          <izz>0.00196</izz>
         </inertia>
-        <mass>8.2573504e-01</mass>
+        <mass>0.8</mass>
       </inertial>
 
       <collision name="base_collision">
@@ -47,6 +59,19 @@
     </link>
 
     <link name="imu_link">
+
+      <inertial>
+        <inertia>
+          <ixx>0.0000001</ixx>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyy>0.0000001</iyy>
+          <iyz>0.0</iyz>
+          <izz>0.0000001</izz>
+        </inertia>
+        <mass>0.01</mass>
+      </inertial>
+
       <sensor name="tb3_imu" type="imu">
         <always_on>1</always_on>
         <update_rate>50</update_rate>
@@ -61,12 +86,12 @@
       <inertial>
         <pose>-0.020 0 0.161 0 0 0</pose>
         <inertia>
-          <ixx>0.001</ixx>
+          <ixx>0.0001</ixx>
           <ixy>0.000</ixy>
           <ixz>0.000</ixz>
-          <iyy>0.001</iyy>
+          <iyy>0.0001</iyy>
           <iyz>0.000</iyz>
-          <izz>0.001</izz>
+          <izz>0.00014</izz>
         </inertia>
         <mass>0.114</mass>
       </inertial>
@@ -110,7 +135,7 @@
               <samples>360</samples>
               <resolution>1.000000</resolution>
               <min_angle>0.000000</min_angle>
-              <max_angle>6.280000</max_angle>
+              <max_angle>6.28319</max_angle>
             </horizontal>
             <vertical>
                 <samples>3</samples>
@@ -120,7 +145,7 @@
           </scan>
           <range>
             <min>0.120000</min>
-            <max>3.5</max>
+            <max>5.5</max>
             <resolution>0.015000</resolution>
           </range>
           <noise>
@@ -133,22 +158,21 @@
     </link>
 
     <link name="wheel_left_link">
-
       <inertial>
-        <pose>0 0.08 0.023 -1.57 0 0</pose>
+        <pose>0 0.08 0.023 0 1.57 1.57</pose>
         <inertia>
-          <ixx>1.8158194e-03</ixx>
-          <ixy>-9.3392e-12</ixy>
-          <ixz>1.04909e-11</ixz>
-          <iyy>3.2922126e-03</iyy>
-          <iyz>5.75694e-11</iyz>
-          <izz>1.8158194e-03</izz>
+          <ixx>0.0000084</ixx>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyy>0.0000084</iyy>
+          <iyz>0.0</iyz>
+          <izz>0.000015</izz>
         </inertia>
-        <mass>2.8498940e-02</mass>
+        <mass>0.028</mass>
       </inertial>
 
       <collision name="wheel_left_collision">
-        <pose>0 0.08 0.023 -1.57 0 0</pose>
+        <pose>0 0.08 0.023 -1.57 1.57 0</pose>
         <geometry>
           <cylinder>
             <radius>0.033</radius>
@@ -159,20 +183,18 @@
           <!-- This friction pamareter don't contain reliable data!! -->
           <friction>
             <ode>
-              <mu>100000.0</mu>
-              <mu2>100000.0</mu2>
-              <fdir1>0 0 0</fdir1>
-              <slip1>0.0</slip1>
-              <slip2>0.0</slip2>
+              <mu>0.1</mu>
+              <mu2>0.1</mu2>
+              <fdir1>1 0 0</fdir1>
+              <slip1>0.0</slip1> 
+              <slip2>0.0</slip2> 
             </ode>
           </friction>
           <contact>
             <ode>
-              <soft_cfm>0</soft_cfm>
-              <soft_erp>0.2</soft_erp>
-              <kp>1e+5</kp>
-              <kd>1</kd>
-              <max_vel>0.01</max_vel>
+              <kp>500000.0</kp>
+              <kd>10.0</kd>
+              <max_vel>0.1</max_vel>
               <min_depth>0.001</min_depth>
             </ode>
           </contact>
@@ -197,22 +219,21 @@
     </link>
 
     <link name="wheel_right_link">
-
       <inertial>
-        <pose>0.0 -0.08 0.023 -1.57 0 0</pose>
+        <pose>0 -0.08 0.023 0 1.57 1.57</pose>
         <inertia>
-          <ixx>1.8158194e-03</ixx>
-          <ixy>-9.3392e-12</ixy>
-          <ixz>1.04909e-11</ixz>
-          <iyy>3.2922126e-03</iyy>
-          <iyz>5.75694e-11</iyz>
-          <izz>1.8158194e-03</izz>
+          <ixx>0.0000084</ixx>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyy>0.0000084</iyy>
+          <iyz>0.0</iyz>
+          <izz>0.000015</izz>
         </inertia>
-        <mass>2.8498940e-02</mass>
+        <mass>0.028</mass>
       </inertial>
 
       <collision name="wheel_right_collision">
-        <pose>0.0 -0.08 0.023 -1.57 0 0</pose>
+        <pose>0 -0.08 0.023 -1.57 1.57 0</pose>
         <geometry>
           <cylinder>
             <radius>0.033</radius>
@@ -223,20 +244,18 @@
           <!-- This friction pamareter don't contain reliable data!! -->
           <friction>
             <ode>
-              <mu>100000.0</mu>
-              <mu2>100000.0</mu2>
-              <fdir1>0 0 0</fdir1>
-              <slip1>0.0</slip1>
-              <slip2>0.0</slip2>
+              <mu>0.1</mu>
+              <mu2>0.1</mu2>
+              <fdir1>1 0 0</fdir1>
+              <slip1>0.0</slip1> 
+              <slip2>0.0</slip2> 
             </ode>
           </friction>
           <contact>
             <ode>
-              <soft_cfm>0</soft_cfm>
-              <soft_erp>0.2</soft_erp>
-              <kp>1e+5</kp>
-              <kd>1</kd>
-              <max_vel>0.01</max_vel>
+              <kp>500000.0</kp>
+              <kd>10.0</kd>
+              <max_vel>0.1</max_vel>
               <min_depth>0.001</min_depth>
             </ode>
           </contact>
@@ -244,7 +263,7 @@
       </collision>
 
       <visual name="wheel_right_visual">
-        <pose>0.0 -0.08 0.023 0 0 0</pose>
+        <pose>0 -0.08 0.023 0 0 0</pose>
         <geometry>
           <mesh>
             <uri>model://turtlebot3_common/meshes/right_tire.stl</uri>
@@ -260,55 +279,102 @@
       </visual>
     </link>
 
-    <link name='caster_back_link'>
-      <pose>-0.081 0 -0.004 -1.57 0 0</pose>
-      <inertial>
-        <mass>0.005</mass>
-        <inertia>
-          <ixx>0.001</ixx>
-          <ixy>0.000</ixy>
-          <ixz>0.000</ixz>
-          <iyy>0.001</iyy>
-          <iyz>0.000</iyz>
-          <izz>0.001</izz>
-        </inertia>
-      </inertial>
-      <collision name='collision'>
-        <geometry>
-          <sphere>
-            <radius>0.005000</radius>
-          </sphere>
-        </geometry>
-        <surface>
-          <contact>
-            <ode>
-              <soft_cfm>0</soft_cfm>
-              <soft_erp>0.2</soft_erp>
-              <kp>1e+5</kp>
-              <kd>1</kd>
-              <max_vel>0.01</max_vel>
-              <min_depth>0.001</min_depth>
-            </ode>
+    <link name='caster_back_link'> 
+      <pose>-0.081 0 -0.004 -1.57 0 0</pose> 
+      <inertial> 
+        <mass>0.003</mass> 
+        <inertia> 
+          <ixx>0.00000005</ixx> 
+          <ixy>0.000</ixy> 
+          <ixz>0.000</ixz> 
+          <iyy>0.00000005</iyy> 
+          <iyz>0.000</iyz> 
+          <izz>0.00000005</izz> 
+        </inertia> 
+      </inertial> 
+      <collision name='collision'> 
+        <geometry> 
+          <sphere> 
+            <radius>0.005000</radius> 
+          </sphere> 
+        </geometry> 
+        <surface> 
+          <contact> 
+            <ode> 
+              <soft_cfm>0</soft_cfm> 
+              <soft_erp>0.2</soft_erp> 
+              <kp>1e+7</kp> 
+              <kd>100</kd> 
+              <max_vel>1.0</max_vel> 
+              <min_depth>0.001</min_depth> 
+            </ode> 
           </contact>
-        </surface>
+          <friction>
+            <ode>
+              <mu>0.1</mu>
+              <mu2>0.1</mu2>
+              <fdir1>0 1 0</fdir1>
+              <slip1>10000.0</slip1> 
+              <slip2>0.0</slip2> 
+            </ode>
+          </friction>
+        </surface> 
       </collision>
-    </link>
+      <visual name="visual">
+        <geometry>
+          <sphere> 
+            <radius>0.005000</radius> 
+          </sphere> 
+        </geometry>
+        <material>
+          <ambient>0.8 0.0 0.0 1</ambient>
+          <diffuse>0.8 0.0 0.0 1</diffuse>
+          <specular>0 0 0 0</specular>
+          <emissive>0 0 0 1</emissive>
+        </material>
+      </visual>
+    </link> 
 
     <link name="camera_link">
+
       <inertial>
         <pose>0 0 0 0 0 0</pose>
         <inertia>
-          <ixx>0.001</ixx>
-          <ixy>0.000</ixy>
-          <ixz>0.000</ixz>
-          <iyy>0.001</iyy>
-          <iyz>0.000</iyz>
-          <izz>0.001</izz>
+          <ixx>0.0000075</ixx>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyy>0.0000075</iyy>
+          <iyz>0.0</iyz>
+          <izz>0.0000075</izz>
         </inertia>
-        <mass>0.035</mass>
+        <mass>0.05</mass>
       </inertial>
 
-      <pose>0 0 0 0 0 0</pose>
+      <collision name="camera_collision">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.02 0.02 0.02</size>
+          </box>
+        </geometry>
+      </collision>
+
+      <visual name="camera_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.02 0.02 0.02</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.8 0 0 1</ambient>
+          <diffuse>0.8 0 0 1</diffuse>
+          <specular>0 0 0 0</specular>
+          <emissive>0 0 0 1</emissive>
+        </material>
+      </visual>
+
+      <pose>0.03 0 0.11 0 0.524 0</pose>
       <sensor name="camera" type="camera">
         <always_on>true</always_on>
         <visualize>true</visualize>
@@ -349,25 +415,49 @@
     <joint name="wheel_left_joint" type="revolute">
       <parent>base_link</parent>
       <child>wheel_left_link</child>
-      <pose>0.0 0.08 0.023 -1.57 0 0</pose>
+      <pose>0.0 0.08 0.023 0 0 0</pose>
       <axis>
-        <xyz>0 0 1</xyz>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <effort>100</effort>
+          <velocity>10</velocity>
+          <lower>-inf</lower>
+          <upper>inf</upper>
+        </limit>
+        <dynamics>
+          <damping>1</damping>
+          <friction>1</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
       </axis>
     </joint>
 
     <joint name="wheel_right_joint" type="revolute">
       <parent>base_link</parent>
       <child>wheel_right_link</child>
-      <pose>0.0 -0.08 0.023 -1.57 0 0</pose>
+      <pose>0.0 -0.08 0.023 0 0 0</pose>
       <axis>
-        <xyz>0 0 1</xyz>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <effort>100</effort>
+          <velocity>10</velocity>
+          <lower>-inf</lower>
+          <upper>inf</upper>
+        </limit>
+        <dynamics>
+          <damping>1</damping>
+          <friction>1</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
       </axis>
     </joint>
 
-    <joint name='caster_back_joint' type='ball'>
-      <parent>base_link</parent>
-      <child>caster_back_link</child>
-    </joint>
+    <joint name='caster_back_joint' type='ball'> 
+      <parent>base_link</parent> 
+      <child>caster_back_link</child> 
+    </joint> 
 
     <joint name="imu_joint" type="fixed">
       <parent>base_link</parent>
@@ -390,7 +480,7 @@
     <joint name="camera_joint" type="fixed">
       <parent>base_link</parent>
       <child>camera_link</child>
-      <pose>0.03 0 0.11 0 0.79 0</pose>
+      <pose>0.04 0 0.11 0 0.79 0</pose>
       <axis>
         <xyz>0 1 0</xyz>
       </axis>
@@ -405,8 +495,16 @@
       <wheel_separation>0.160</wheel_separation>
       <wheel_radius>0.033</wheel_radius>
 
-      <!-- limits -->
-      <max_linear_acceleration>1.0</max_linear_acceleration>
+      <!-- Control gains and limits (optional) -->
+      <max_velocity>3.0</max_velocity>                <!-- Max linear velocity in m/s -->
+      <max_linear_acceleration>1</max_linear_acceleration>
+      <min_linear_acceleration>-1</min_linear_acceleration>
+      <max_angular_acceleration>2</max_angular_acceleration>
+      <min_angular_acceleration>-2</min_angular_acceleration>
+      <max_linear_velocity>0.5</max_linear_velocity>
+      <min_linear_velocity>-0.5</min_linear_velocity>
+      <max_angular_velocity>1</max_angular_velocity>
+      <min_angular_velocity>-1</min_angular_velocity>
 
       <topic>cmd_vel</topic>
 
