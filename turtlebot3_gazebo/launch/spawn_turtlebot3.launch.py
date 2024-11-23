@@ -43,6 +43,11 @@ def generate_launch_description():
         description='y coordinate of spawned robot'
     )
 
+    z_pose_arg = DeclareLaunchArgument(
+        'z_pose', default_value='0.01',
+        description='z coordinate of spawned robot'
+    )
+
     yaw_angle_arg = DeclareLaunchArgument(
         'yaw_angle', default_value='0.0',
         description='yaw angle of spawned robot'
@@ -56,7 +61,7 @@ def generate_launch_description():
             '-file', urdf_path,
             '-x', LaunchConfiguration('x_pose'),
             '-y', LaunchConfiguration('y_pose'),
-            '-z', '0.01',
+            '-z', LaunchConfiguration('z_pose'),
             '-Y', LaunchConfiguration('yaw_angle')
         ],
         output='screen',
@@ -91,6 +96,7 @@ def generate_launch_description():
     # Declare the launch options
     ld.add_action(x_pose_arg)
     ld.add_action(y_pose_arg)
+    ld.add_action(z_pose_arg)
     ld.add_action(yaw_angle_arg)
 
     # Add any conditioned actions
