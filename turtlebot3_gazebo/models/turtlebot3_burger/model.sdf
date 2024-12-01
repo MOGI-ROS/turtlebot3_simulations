@@ -380,10 +380,10 @@
         <always_on>true</always_on>
         <visualize>true</visualize>
         <update_rate>20</update_rate>
-        <topic>camera/image_raw</topic>
+        <topic>image_raw</topic>
         <gz_frame_id>camera_link</gz_frame_id>
         <camera name="intel_realsense_r200">
-          <camera_info_topic>camera/camera_info</camera_info_topic>
+          <camera_info_topic>camera_info</camera_info_topic>
           <optical_frame_id>camera_link_optical</optical_frame_id>
           <horizontal_fov>1.3962634</horizontal_fov>
           <image>
